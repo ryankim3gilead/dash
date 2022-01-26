@@ -875,7 +875,21 @@ def test_grva010_external_mathjax_prevents_lazy(dash_dcc):
         if n_clicks is None:
             raise PreventUpdate
 
-        return dcc.Graph(mathjax=True, id="output", figure={"data": [{"y": [3, 1, 2]}]})
+        return dcc.Graph(
+            mathjax=True,
+            id="output",
+            figure={
+                "data": [
+                    {"line": {"width": 5}, "y": [0, 1, 0, 1, 0], "x": [0, 0, 1, 2, 2]}
+                ],
+                "layout": {
+                    "title": {
+                        "text": "$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}$",
+                        "font": {"color": "green"},
+                    }
+                },
+            },
+        )
 
     dash_dcc.start_server(
         app,
